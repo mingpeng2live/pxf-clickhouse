@@ -97,7 +97,7 @@ PXF-CLICKHOUSE
         </property>
     </configuration>
     
-* 将本工程jar放入pxf/lib目录，包括Clickhouse驱动及其依赖jar包(请使用src/test/resources/clickhouse-jdbc-0.3.1-SNAPSHOT-shaded.jar包)，重启pxf集群
+* 将本工程jar放入pxf/lib目录，包括Clickhouse驱动及其依赖jar包(请用src/test/resources目录下的包或者自行编译：https://github.com/mingpeng2live/clickhouse-jdbc.git) 重启pxf集群。
 
 
  
