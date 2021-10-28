@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<profiles>
+    <profile>
+        <name>clickhouse</name>
+        <description>A profile for reading and writing data via Clickhouse JDBC</description>
+        <plugins>
+            <fragmenter>org.greenplum.pxf.plugins.clickhouse.ClickHouseFragmenter</fragmenter>
+            <accessor>org.greenplum.pxf.plugins.clickhouse.ClickHouseAccessor</accessor>
+            <resolver>org.greenplum.pxf.plugins.clickhouse.ClickHouseResolver</resolver>
+        </plugins>
+        <optionMappings>
+            <mapping option="jdbc_driver" property="jdbc.driver"/>
+            <mapping option="db_url" property="jdbc.url"/>
+            <mapping option="user" property="jdbc.user"/>
+            <mapping option="pass" property="jdbc.password"/>
+            <mapping option="batch_size" property="jdbc.statement.batchSize"/>
+            <mapping option="fetch_size" property="jdbc.statement.fetchSize"/>
+            <mapping option="query_timeout" property="jdbc.statement.queryTimeout"/>
+        </optionMappings>
+    </profile>
+</profiles>

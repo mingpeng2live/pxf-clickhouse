@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <property>
+        <name>jdbc.driver</name>
+        <value>ru.yandex.clickhouse.ClickHouseDriver</value>
+        <description>Class name of the JDBC driver (e.g. org.postgresql.Driver)</description>
+    </property>
+    <property>
+        <name>jdbc.url</name>
+        <value>jdbc:clickhouse://10.218.1.204:8123/default;jdbc:clickhouse://10.218.1.205:8123/default;jdbc:clickhouse://10.218.1.206:8123/default</value>
+        <description>Multiple shard uses; division(e.g. jdbc:clickhouse://10.218.1.204:8123/default;jdbc:clickhouse://10.218.1.205:8123/default)  Backup, split (e.g. jdbc:clickhouse://10.218.1.204:8123,10.218.1.205:8123/default)</description>
+    </property>
+    <property>
+        <name>jdbc.user</name>
+        <value>default</value>
+        <description>User name for connecting to the database (e.g. postgres)</description>
+    </property>
+    <property>
+        <name>jdbc.password</name>
+        <value></value>
+        <description>Password for connecting to the database (e.g. postgres)</description>
+    </property>
+
+    <!-- Connection Pool properties -->
+    <!-- You can use properties described here: https://github.com/brettwooldridge/HikariCP
+         except for the following ones: dataSourceClassName, jdbcUrl, username, password,
+         dataSource.user, dataSource.password
+    -->
+    <property>
+        <name>jdbc.segment.shard.writer.enabled</name>
+        <value>true</value>
+        <description>Only when the number of Clickhouse shard is greater than 1 can it be valid. default true</description>
+    </property>
+    <property>
+        <name>jdbc.segment.column.name</name>
+        <value>segment_id</value>
+        <description>When jdbc.segment.shard.writer.enabled is valid, the value of segmentId is determined according to the configuration field name. default segment_id</description>
+    </property>
+
+
+    <property>
+        <name>jdbc.pool.enabled</name>
+        <value>true</value>
+        <description>Use connection pool for JDBC</description>
+    </property>
+
+    <property>
+        <name>jdbc.pool.property.maximumPoolSize</name>
+        <value>5</value>
+        <description>The maximum number of actual connections to the database backend</description>
+    </property>
+    <property>
+        <name>jdbc.pool.property.connectionTimeout</name>
+        <value>30000</value>
+        <description>The maximum time (in milliseconds) to wait for a connection from the pool</description>
+    </property>
+    <property>
+        <name>jdbc.pool.property.idleTimeout</name>
+        <value>30000</value>
+        <description>The maximum time (in milliseconds) that a connection will sit idle in the pool</description>
+    </property>
+    <property>
+        <name>jdbc.pool.property.minimumIdle</name>
+        <value>0</value>
+        <description>The minimum number of idle connections to maintain in the pool</description>
+    </property>
+
+    <!--
+    <property>
+        <name>jdbc.pool.qualifier</name>
+        <value>${pxf.session.user}</value>
+        <description>
+            A separate connection pool will be created for each value of the given qualifier, even if all other parameters
+            are the same. Might be useful when jdbc.session.property is set to do session authorization to switch users
+            once connected, in which case set it to ${pxf.session.user} so that a separate pool is created for every
+            effective user.
+        </description>
+    </property>
+    -->
+
+    <!-- Statement level properties -->
+    <!--
+    <property>
+        <name>jdbc.statement.writeSize</name>
+        <value>10000</value>
+        <description>Number of rows that should be batched prior to writing. Default is 100</description>
+    </property>
+    -->
+    <!--
+    <property>
+        <name>jdbc.statement.fetchSize</name>
+        <value>10000</value>
+        <description>Number of rows that should be fetched at a time during read. Default is 1000</description>
+    </property>
+    -->
+
+    <!-- Transaction isolation level
+         {READ_UNCOMMITTED | READ_COMMITTED | REPEATABLE_READ | SERIALIZABLE} -->
+    <!--
+    <property>
+        <name>jdbc.connection.transactionIsolation</name>
+        <value>YOUR_CHOSEN_TRANSACTION_ISOLATION_FROM_ABOVE</value>
+        <description>JDBC connection transaction isolation level. Make sure your database supports the level you define here</description>
+    </property>
+    -->
+
+    <!-- Session-level properties -->
+    <!--
+    <property>
+        <name>jdbc.session.property.some_property_1</name>
+        <value>some_value_1</value>
+        <description>Session-level variable to set in external database before query execution</description>
+    </property>
+    -->
+    <!--
+    <property>
+        <name>jdbc.session.property.some_property_2</name>
+        <value>some_value_2</value>
+        <description>Session-level variable to set in external database before query execution</description>
+    </property>
+    -->
+
+    <!-- Connection properties -->
+    <!--
+    <property>
+        <name>jdbc.connection.property.some_property_1</name>
+        <value>some_value_1</value>
+        <description>JDBC connection property</description>
+    </property>
+    -->
+    <!--
+    <property>
+        <name>jdbc.connection.property.some_property_2</name>
+        <value>some_value_2</value>
+        <description>JDBC connection property</description>
+    </property>
+    -->
+
+    <!--
+    <property>
+        <name>pxf.service.user.impersonation</name>
+        <value>false</value>
+        <description>Impersonate Greenplum user when connecting to the remote database (previously known as pxf.impersonation.jdbc)</description>
+    </property>
+    -->
+</configuration>
