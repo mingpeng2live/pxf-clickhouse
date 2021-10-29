@@ -15,6 +15,10 @@ PXF-CLICKHOUSE
 ## Architecture
 
 ![Image text](src/test/resources/j.png)
+* 本插件为图中 PXF CH Plugin 组件(为Greenplum PXF插件的插件，Greenplum PXF在此不做介绍)。
+* segment 的数据是以流的方式通过HTTP协议发送到 PXF 插件再将数据路由到本插件进行处理。
+* 图中 segment 上的实线为真实HTTP请求，虚线表示有数据到当前组件。 
+* 图中 Clickhouse Shard(其中Replica Host为分片中的副本)上的线均为实际jdbc连接到具体的 Clickhouse Replica Host 服务。
 
 
 ## Config
