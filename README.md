@@ -10,7 +10,7 @@ PXF-CLICKHOUSE
 ## Prerequisites
 
 * Java (Version: `1.8`)
-* Greenplum PXF 6.0+
+* Greenplum PXF (Version: `6.0+`)
 
 
 ## Config
@@ -96,9 +96,17 @@ PXF-CLICKHOUSE
             <description>The minimum number of idle connections to maintain in the pool</description>
         </property>
     </configuration>
-    
+
 * 将本工程jar放入pxf/lib目录，包括Clickhouse驱动及其依赖jar包(请用src/test/resources目录下的包或者自行编译：https://github.com/mingpeng2live/clickhouse-jdbc.git) 重启pxf集群。
 
+* 数据写入 Clickhouse
+    * 根据 segment_id 来写入到具体分片副本：
+        * jdbc.segment.shard.writer.enabled (default: true) = true
+        * jdbc.segment.column.name (default: segment_id) = segment_id （可以指定, 但在创建可写外部表时需包含此字段，同时写入数据时需要加入 gp_segment_id as segment_id 处理，具体参考下面列子）
+    * 无需根据 segment_id 来写入：
+        * jdbc.segment.shard.writer.enabled (default: true) = false
+    * jdbc.url 此配置项可以配置多个url，会按照配置的顺序构建一个list：
+        * segment在写入数据到Clickhouse时按照segment_id%listSize来找到对应的写入分片副本。
 
  
 ## Example  
