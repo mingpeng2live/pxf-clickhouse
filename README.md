@@ -12,6 +12,10 @@ PXF-CLICKHOUSE
 * Java (Version: `1.8`)
 * Greenplum PXF (Version: `6.0+`)
 
+## Architecture
+
+![Image text](src/test/resources/j.png)
+
 
 ## Config
     #pxf/conf/pxf-profiles.xml add:
