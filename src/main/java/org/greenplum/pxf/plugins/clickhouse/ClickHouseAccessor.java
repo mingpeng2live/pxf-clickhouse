@@ -67,7 +67,7 @@ public class ClickHouseAccessor extends ClickHouseBasePlugin implements Accessor
     @Override
     public void afterPropertiesSet() {
         super.afterPropertiesSet();
-        LOG.info("segmentColumnName: {} segmentColumnIndex: {} columnSize: {} columns: {}", segmentColumnName, segmentColumnIndex, columns.size(), columns);
+//        LOG.info("segmentColumnName: {} segmentColumnIndex: {} columnSize: {} columns: {}", segmentColumnName, segmentColumnIndex, columns.size(), columns);
     }
 
     /**
@@ -175,7 +175,8 @@ public class ClickHouseAccessor extends ClickHouseBasePlugin implements Accessor
             LOG.info("The POOL_SIZE is set to the number of CPUs available ({})", poolSize);
         }
 
-        LOG.info("Insert query: {} batchSize: {} poolSize: {} jdbcShardSize: {}", queryWrite, batchSize, poolSize, jdbcUrlShardReplicas.size());
+        LOG.info("Insert query: {}  batchSize: {}  poolSize: {}  jdbcShardSize: {}  segmentColumnName: {}  segmentColumnIndex: {}  columnSize: {}",
+                queryWrite, batchSize, poolSize, jdbcUrlShardReplicas.size(), segmentColumnName, segmentColumnIndex, columns.size());
 
         // Setup SegmentId Writer Shard
         segmentIdSortUtils = new SegmentIdSortUtils(this, queryWrite, batchSize, poolSize);

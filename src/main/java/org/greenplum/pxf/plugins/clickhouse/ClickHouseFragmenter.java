@@ -97,6 +97,6 @@ public class ClickHouseFragmenter extends BaseFragmenter {
      */
     @Override
     public FragmentStats getFragmentStats() throws UnsupportedOperationException {
-        throw new UnsupportedOperationException("ANALYZE for JDBC plugin is not supported");
+        throw new UnsupportedOperationException("ANALYZE for ClickHouse JDBC plugin is not supported");
     }
 }

@@ -51,7 +51,7 @@ public class ClickHouseBasePlugin extends BasePlugin {
     // '10000' is a recommended value: https://docs.oracle.com/cd/E11882_01/java.112/e16548/oraperf.htm#JJDBC28754
     private static final int DEFAULT_BATCH_SIZE = 100000;
     private static final int DEFAULT_FETCH_SIZE = 100000;
-    private static final int DEFAULT_POOL_SIZE = 2;
+    private static final int DEFAULT_POOL_SIZE = 1;
 
     // configuration parameter names
     private static final String JDBC_DRIVER_PROPERTY_NAME = "jdbc.driver";

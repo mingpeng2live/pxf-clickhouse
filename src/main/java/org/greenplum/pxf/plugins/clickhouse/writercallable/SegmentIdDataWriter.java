@@ -2,6 +2,8 @@ package org.greenplum.pxf.plugins.clickhouse.writercallable;
 
 import org.greenplum.pxf.api.OneRow;
 import org.greenplum.pxf.plugins.clickhouse.ClickHouseBasePlugin;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import ru.yandex.clickhouse.ClickHousePreparedStatement;
 
 import java.sql.BatchUpdateException;
@@ -9,6 +11,8 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 class SegmentIdDataWriter implements WriterCallable {
+
+    private static final Logger LOG = LoggerFactory.getLogger(SegmentIdDataWriter.class);
 
     @Override
     public void supply(OneRow row) throws IllegalStateException {
@@ -18,6 +22,7 @@ class SegmentIdDataWriter implements WriterCallable {
         try {
             statement.unwrap(ClickHousePreparedStatement.class).addRow((StringBuilder) row.getData());
         } catch (Exception e) {
+            LOG.error("add row error", e);
             throw new IllegalArgumentException("Trying to supply() a null OneRow object", e);
         }
         rows++;
@@ -37,9 +42,11 @@ class SegmentIdDataWriter implements WriterCallable {
         try {
             statement.executeBatch();
         } catch (BatchUpdateException bue) {
+            LOG.error("exec error", bue);
             SQLException cause = bue.getNextException();
             return cause != null ? cause : bue;
         } catch (SQLException e) {
+            LOG.error("exec error", e);
             return e;
         } finally {
             ClickHouseBasePlugin.closeStatementAndConnection(statement);

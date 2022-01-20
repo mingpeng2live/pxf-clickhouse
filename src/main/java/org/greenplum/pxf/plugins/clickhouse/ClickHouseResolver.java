@@ -210,19 +210,6 @@ public class ClickHouseResolver extends ClickHouseBasePlugin implements Resolver
                 }
             }
         }
-//        else if (type.startsWith("_json")) {
-//            String[] jsons = (String[]) result.getArray(columnIndex).getArray();
-//            for (String item : jsons) {
-//                if (item != null) {
-//                    if (item.contains("\\")) {
-//                        item = item.replaceAll("\\\\", "\\\\\\\\");
-//                    }
-//                    resultStr.append("\"").append(item.replaceAll("\"", "\\\\\"")).append("\"").append(",");
-//                } else {
-//                    resultStr.append("NULL").append(",");
-//                }
-//            }
-//        }
         resultStr.deleteCharAt(resultStr.length() - 1);
         return resultStr.length() == 0 ? null : resultStr.append("}").toString();
     }

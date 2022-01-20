@@ -62,7 +62,7 @@ public class SegmentIdSortUtils {
 
         if (this.poolSize > 1 || jdbcShardSize > 1) {
             int nThreads = poolSize * jdbcShardSize;
-            executorServiceWrite = Executors.newFixedThreadPool(nThreads > 5 ? 5 : nThreads); // 最多5个同时写入
+            executorServiceWrite = Executors.newFixedThreadPool(nThreads > 2 ? 2 : nThreads); // 最多2个同时写入
             poolTasks = new LinkedList<>();
         }
     }
@@ -161,6 +161,7 @@ public class SegmentIdSortUtils {
             }
         }
         if (firstException != null) {
+            LOG.error("error", firstException);
             throw firstException;
         }
     }
